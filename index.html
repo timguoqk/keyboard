@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.js" charset="utf-8"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.1/semantic.min.js"></script>
+	<script src="http://underscorejs.org/underscore-min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.1/semantic.min.css">
+	<link rel="stylesheet" href="main.css">
+	<script src="main.js"></script>
+</head>
+<body>
+<div id="container">
+	<h1>Keyboard: A visualization</h1>
+	<ul id="keyboard">
+		<li class="symbol"><span class="off">`</span><span class="on">~</span></li>
+		<li class="symbol"><span class="off">1</span><span class="on">!</span></li>
+		<li class="symbol"><span class="off">2</span><span class="on">@</span></li>
+		<li class="symbol"><span class="off">3</span><span class="on">#</span></li>
+		<li class="symbol"><span class="off">4</span><span class="on">$</span></li>
+		<li class="symbol"><span class="off">5</span><span class="on">%</span></li>
+		<li class="symbol"><span class="off">6</span><span class="on">^</span></li>
+		<li class="symbol"><span class="off">7</span><span class="on">&amp;</span></li>
+		<li class="symbol"><span class="off">8</span><span class="on">*</span></li>
+		<li class="symbol"><span class="off">9</span><span class="on">(</span></li>
+		<li class="symbol"><span class="off">0</span><span class="on">)</span></li>
+		<li class="symbol"><span class="off">-</span><span class="on">_</span></li>
+		<li class="symbol"><span class="off">=</span><span class="on">+</span></li>
+		<li class="delete lastitem">delete</li>
+		<li class="tab">tab</li>
+		<li class="letter ripple" id="q">q</li>
+		<li class="letter ripple" id="w">w</li>
+		<li class="letter ripple" id="e">e</li>
+		<li class="letter ripple" id="r">r</li>
+		<li class="letter ripple" id="t">t</li>
+		<li class="letter ripple" id="y">y</li>
+		<li class="letter ripple" id="u">u</li>
+		<li class="letter ripple" id="i">i</li>
+		<li class="letter ripple" id="o">o</li>
+		<li class="letter ripple" id="p">p</li>
+		<li class="symbol"><span class="off">[</span><span class="on">{</span></li>
+		<li class="symbol"><span class="off">]</span><span class="on">}</span></li>
+		<li class="symbol lastitem"><span class="off">\</span><span class="on">|</span></li>
+		<li class="capslock">caps lock</li>
+		<li class="letter ripple" id="a">a</li>
+		<li class="letter ripple" id="s">s</li>
+		<li class="letter ripple" id="d">d</li>
+		<li class="letter ripple" id="f">f</li>
+		<li class="letter ripple" id="g">g</li>
+		<li class="letter ripple" id="h">h</li>
+		<li class="letter ripple" id="j">j</li>
+		<li class="letter ripple" id="k">k</li>
+		<li class="letter ripple" id="l">l</li>
+		<li class="symbol"><span class="off">;</span><span class="on">:</span></li>
+		<li class="symbol"><span class="off">'</span><span class="on">&quot;</span></li>
+		<li class="return lastitem">return</li>
+		<li class="left-shift">shift</li>
+		<li class="letter ripple" id="z">z</li>
+		<li class="letter ripple" id="x">x</li>
+		<li class="letter ripple" id="c">c</li>
+		<li class="letter ripple" id="v">v</li>
+		<li class="letter ripple" id="b">b</li>
+		<li class="letter ripple" id="n">n</li>
+		<li class="letter ripple" id="m">m</li>
+		<li class="symbol"><span class="off">,</span><span class="on">&lt;</span></li>
+		<li class="symbol"><span class="off">.</span><span class="on">&gt;</span></li>
+		<li class="symbol"><span class="off">/</span><span class="on">?</span></li>
+		<li class="right-shift lastitem">shift</li>
+		<li class="space lastitem">&nbsp;</li>
+	</ul>
+	<div class="ui grid">
+		<div class="row">
+			<div class="nine wide column">
+				<div class="ui inverted segment">
+					<span id="textarea"></span>
+					<span class="typed-cursor">|</span>
+				</div>
+			</div>
+			<div class="seven wide column">
+				<div class="ui statistics">
+					<div class="statistic" id="dist-stat">
+						<div class="value">0</div>
+						<div class="label">Units of distance moved</div>
+					</div>
+					<div class="statistic" id="dist-letters">
+						<div class="value">0</div>
+						<div class="label">Letters typed</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
