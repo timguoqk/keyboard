@@ -30,7 +30,7 @@ body {
 	transition: all 0.2s ease-in-out;
 }
 #keyboard li.active {
-	background: gray;
+	background: #ff5252;
 }
 .capslock, .tab, .left-shift {
 	clear: left;
@@ -128,6 +128,6 @@ body {
 	100% { opacity:1; }
 }
 
-#textarea {
+#textarea, #matrix {
 	overflow-wrap: break-word;
 }

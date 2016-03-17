@@ -17,7 +17,7 @@ $(document).ready(function() {
     $div.css({
       top: yPos - ($ripple.height()/2),
       left: xPos - ($ripple.width()/2),
-      background: '#89669b'
+      background: '#ffffff'
     }) 
     .appendTo($(this));
 
@@ -33,7 +33,7 @@ $(document).ready(function() {
   };
   var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   var locations = ['a', 's', 'd', 'f', 'j', 'k', 'l', 'p'];
-  $.getJSON('englishf.json', function(json, textStatus) {
+  $.getJSON((window.location.hash || '#englishf').substr(1) + '.json', function(json, textStatus) {
      simulate(json, mapping, locations); 
   });
 
@@ -41,6 +41,7 @@ $(document).ready(function() {
     var distance = 0, count = 0, current = 'a';
     for (var i = 0; i < locations.length; i ++)
       $('#' + locations[i]).addClass('active');
+    $('#matrix').text(freq.toString());
     var run = function() {
       count += 1;
       current = getRandomItem(letters, freq[current.charCodeAt(0) - 'a'.charCodeAt(0)]);
@@ -54,7 +55,7 @@ $(document).ready(function() {
       }
       $('#dist-stat>.value').text(distance);
       $('#dist-letters>.value').text(count);
-      window.setTimeout(run, 500);
+      window.setTimeout(run, 300);
     }
     run();
   }
