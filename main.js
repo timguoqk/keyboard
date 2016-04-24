@@ -1,6 +1,11 @@
 'use strict';
 
-$(document).ready(function() {
+var helper = require('./helper');
+console.log(helper);
+
+$(document).ready(main);
+
+function main() {
   $('.ripple').on('click', function (event) {
     event.preventDefault();
 
@@ -33,7 +38,7 @@ $(document).ready(function() {
   };
   var letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
   var locations = ['a', 's', 'd', 'f', 'j', 'k', 'l', 'p'];
-  $.getJSON((window.location.hash || '#englishf').substr(1) + '.json', function(json, textStatus) {
+  $.getJSON('data/' + (window.location.hash || '#englishf').substr(1) + '.json', function(json, textStatus) {
      simulate(json, mapping, locations); 
   });
 
@@ -44,7 +49,7 @@ $(document).ready(function() {
     $('#matrix').text(freq.toString());
     var run = function() {
       count += 1;
-      current = getRandomItem(letters, freq[current.charCodeAt(0) - 'a'.charCodeAt(0)]);
+      current = helper.getRandomItem(letters, freq[current.charCodeAt(0) - 'a'.charCodeAt(0)]);
       $('#' + current).click();
       $('#' + current).addClass('active');
       $('#textarea').append(current);
@@ -58,27 +63,5 @@ $(document).ready(function() {
       window.setTimeout(run, 300);
     }
     run();
-  }
-});
-
-// From http://codetheory.in/weighted-biased-random-number-generation-with-javascript-based-on-probability/
-function rand(min, max) {
-  return Math.random() * (max - min) + min;
-}
-
-function getRandomItem(list, weight) {
-  var total_weight = weight.reduce(function (prev, cur, i, arr) {
-    return prev + cur;
-  });
-
-  var random_num = rand(0, total_weight);
-  var weight_sum = 0;
-
-  for (var i = 0; i < list.length; i++) {
-    weight_sum += weight[i];
-    weight_sum = +weight_sum.toFixed(2);
-
-    if (random_num <= weight_sum)
-      return list[i];
   }
 }
