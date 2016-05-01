@@ -1,3 +1,4 @@
+// https://facebook.github.io/react/tips/communicate-between-components.html
 require("./Keyboard.css");
 
 import React from 'react';
@@ -8,7 +9,7 @@ class Keyboard extends React.Component {
     super(props);
     this.state = {
       locations: ['a', 's', 'd', 'f', 'j', 'k', 'l', 'p'],
-      this.state.distance: 0,
+      distance: 0,
       count: 0,
       current: 'a'
     };
@@ -34,7 +35,7 @@ class Keyboard extends React.Component {
     run();
   }
 
-  run = function() {
+  run() {
     this.state.count += 1;
     current = helper.getRandomItem(letters, freq[current.charCodeAt(0) - 'a'.charCodeAt(0)]);
     $('#' + current).click();
@@ -48,6 +49,10 @@ class Keyboard extends React.Component {
     $('#dist-stat>.value').text(this.state.distance);
     $('#dist-letters>.value').text(this.state.count);
     window.setTimeout(run, 300);
+  }
+
+  classNameOf(letter) {
+    return this.state.locations.indexOf(letter) == -1 ? 'letter ripple' : 'letter ripple active';
   }
 
   render() {
@@ -68,40 +73,40 @@ class Keyboard extends React.Component {
         <li className="symbol"><span className="off">{this.props.map['=']}</span><span className="on">{this.props.map['+']}</span></li>
         <li className="delete lastitem">delete</li>
         <li className="tab">tab</li>
-        <li className="letter ripple" id="q">{this.props.map['q']}</li>
-        <li className="letter ripple" id="w">{this.props.map['w']}</li>
-        <li className="letter ripple" id="e">{this.props.map['e']}</li>
-        <li className="letter ripple" id="r">{this.props.map['r']}</li>
-        <li className="letter ripple" id="t">{this.props.map['t']}</li>
-        <li className="letter ripple" id="y">{this.props.map['y']}</li>
-        <li className="letter ripple" id="u">{this.props.map['u']}</li>
-        <li className="letter ripple" id="i">{this.props.map['i']}</li>
-        <li className="letter ripple" id="o">{this.props.map['o']}</li>
-        <li className="letter ripple" id="p">{this.props.map['p']}</li>
+        <li className={this.classNameOf('q')} id="q">{this.props.map['q']}</li>
+        <li className={this.classNameOf('w')} id="w">{this.props.map['w']}</li>
+        <li className={this.classNameOf('e')} id="e">{this.props.map['e']}</li>
+        <li className={this.classNameOf('r')} id="r">{this.props.map['r']}</li>
+        <li className={this.classNameOf('t')} id="t">{this.props.map['t']}</li>
+        <li className={this.classNameOf('y')} id="y">{this.props.map['y']}</li>
+        <li className={this.classNameOf('u')} id="u">{this.props.map['u']}</li>
+        <li className={this.classNameOf('i')} id="i">{this.props.map['i']}</li>
+        <li className={this.classNameOf('o')} id="o">{this.props.map['o']}</li>
+        <li className={this.classNameOf('p')} id="p">{this.props.map['p']}</li>
         <li className="symbol"><span className="off">{this.props.map['[']}</span><span className="on">{"{"}</span></li>
         <li className="symbol"><span className="off">{this.props.map[']']}</span><span className="on">{"}"}</span></li>
         <li className="symbol lastitem"><span className="off">{this.props.map['\\']}</span><span className="on">{this.props.map['|']}</span></li>
         <li className="capslock">caps lock</li>
-        <li className="letter ripple" id="a">{this.props.map['a']}</li>
-        <li className="letter ripple" id="s">{this.props.map['s']}</li>
-        <li className="letter ripple" id="d">{this.props.map['d']}</li>
-        <li className="letter ripple" id="f">{this.props.map['f']}</li>
-        <li className="letter ripple" id="g">{this.props.map['g']}</li>
-        <li className="letter ripple" id="h">{this.props.map['h']}</li>
-        <li className="letter ripple" id="j">{this.props.map['j']}</li>
-        <li className="letter ripple" id="k">{this.props.map['k']}</li>
-        <li className="letter ripple" id="l">{this.props.map['l']}</li>
+        <li className={this.classNameOf('a')} id="a">{this.props.map['a']}</li>
+        <li className={this.classNameOf('s')} id="s">{this.props.map['s']}</li>
+        <li className={this.classNameOf('d')} id="d">{this.props.map['d']}</li>
+        <li className={this.classNameOf('f')} id="f">{this.props.map['f']}</li>
+        <li className={this.classNameOf('g')} id="g">{this.props.map['g']}</li>
+        <li className={this.classNameOf('h')} id="h">{this.props.map['h']}</li>
+        <li className={this.classNameOf('j')} id="j">{this.props.map['j']}</li>
+        <li className={this.classNameOf('k')} id="k">{this.props.map['k']}</li>
+        <li className={this.classNameOf('l')} id="l">{this.props.map['l']}</li>
         <li className="symbol"><span className="off">{this.props.map[';']}</span><span className="on">{this.props.map[':']}</span></li>
         <li className="symbol"><span className="off">{this.props.map["'"]}</span><span className="on">&quot;</span></li>
         <li className="return lastitem">return</li>
         <li className="left-shift">shift</li>
-        <li className="letter ripple" id="z">{this.props.map['z']}</li>
-        <li className="letter ripple" id="x">{this.props.map['x']}</li>
-        <li className="letter ripple" id="c">{this.props.map['c']}</li>
-        <li className="letter ripple" id="v">{this.props.map['v']}</li>
-        <li className="letter ripple" id="b">{this.props.map['b']}</li>
-        <li className="letter ripple" id="n">{this.props.map['n']}</li>
-        <li className="letter ripple" id="m">{this.props.map['m']}</li>
+        <li className={this.classNameOf('z')} id="z">{this.props.map['z']}</li>
+        <li className={this.classNameOf('x')} id="x">{this.props.map['x']}</li>
+        <li className={this.classNameOf('c')} id="c">{this.props.map['c']}</li>
+        <li className={this.classNameOf('v')} id="v">{this.props.map['v']}</li>
+        <li className={this.classNameOf('b')} id="b">{this.props.map['b']}</li>
+        <li className={this.classNameOf('n')} id="n">{this.props.map['n']}</li>
+        <li className={this.classNameOf('m')} id="m">{this.props.map['m']}</li>
         <li className="symbol"><span className="off">{this.props.map[',']}</span><span className="on">&lt;</span></li>
         <li className="symbol"><span className="off">{this.props.map['.']}</span><span className="on">&gt;</span></li>
         <li className="symbol"><span className="off">{this.props.map['/']}</span><span className="on">{this.props.map['?']}</span></li>
