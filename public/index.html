@@ -5,34 +5,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.1/semantic.min.js"></script>
 	<script src="http://underscorejs.org/underscore-min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.1/semantic.min.css">
+	<script async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"></script>
 	<link rel="stylesheet" href="main.css">
 </head>
 <body>
-<div id="container">
-	<h1>Keyboard: A visualization</h1>
-	<div id="keyboard-container"></div>
-	<div class="ui grid">
-		<div class="row">
-			<div class="nine wide column">
-				<div class="ui inverted segment">
-					<span id="textarea"></span>
-					<span class="typed-cursor">|</span>
-				</div>
-			</div>
-			<div class="seven wide column">
-				<div class="ui statistics">
-					<div class="statistic" id="dist-stat">
-						<div class="value">0</div>
-						<div class="label">Units of distance moved</div>
-					</div>
-					<div class="statistic" id="dist-letters">
-						<div class="value">0</div>
-						<div class="label">Letters typed</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="ui grid">
+	<div id="container"></div>
 </div>
 <script src="./bundle.js"></script>
 </body>

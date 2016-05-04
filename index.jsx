@@ -1,5 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Keyboard from 'Keyboard';
+import App from 'App';
 
-ReactDOM.render(<Keyboard />, document.getElementById('keyboard-container'));
+ReactDOM.render(<App />, document.getElementById('container'));
