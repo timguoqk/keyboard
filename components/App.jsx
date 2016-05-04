@@ -23,13 +23,19 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    $('.ui.dropdown').dropdown();
     var that = this;
+    $('.ui.dropdown').dropdown({onChange: function(value, text, $choice) {
+      that.setState({
+        current_letter: that.props.letters[0],
+        textarea_text: '',
+        curr_lang_num: value
+      });
+      MathJax.Hub.Typeset();
+    }});
     window.setInterval(function() {that.simulate(that);}, 300);
   }
 
   simulate(that) {
-    console.log('hit!');
     var freq = that.props.lang[this.state.curr_lang_num][1];
     this.setState({current_letter: helper.getRandomItem(this.props.letters, freq[this.state.current_letter.charCodeAt(0) - 'a'.charCodeAt(0)])});
     this.setState({textarea_text: this.state.textarea_text + this.state.current_letter});
@@ -41,11 +47,12 @@ class App extends React.Component {
 
   render() {
     var current_letter = this.state.current_letter;
+    var curr_lang_num = this.state.curr_lang_num;
     return (
       <div>
       <h1>Keyboard: A visualization</h1>
       {this.props.lang.map(function(x) {
-        return <Keyboard key={x[0]} name={x[0]} freq={x[1]} layout={x[2]} next_letter={current_letter} />
+        return <Keyboard key={x[0] + curr_lang_num} name={x[0]} freq={x[1]} layout={x[2]} next_letter={current_letter} />
       })}
       <div className="row">
         <div className="nine wide column">
@@ -55,13 +62,14 @@ class App extends React.Component {
           </div>
         </div>
         <div className="seven wide column">
-          <div className="ui selection dropdown" onChange={this.onDropdownChange} >
-            <input type="hidden" name="gender" />
+          <div className="ui selection dropdown" >
+            <input type="hidden" name="lang" />
             <i className="dropdown icon"></i>
-            <div className="default text">Gender</div>
+            <div className="default text">Choose corpus</div>
             <div className="menu">
-              <div className="item" data-value="1">Male</div>
-              <div className="item" data-value="0">Female</div>
+              {this.props.lang.map(function(x, i) {
+                return (<div className="item" data-value={i}>{x[0]}</div>);
+              })}
             </div>
           </div>
         </div>
