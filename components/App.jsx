@@ -4,6 +4,7 @@ import React from 'react';
 import helper from '../helper';
 import * as _ from 'lodash';
 import Keyboard from 'Keyboard';
+import layout from '../layout';
 
 class App extends React.Component {
   constructor(props) {
@@ -41,10 +42,6 @@ class App extends React.Component {
     this.setState({textarea_text: this.state.textarea_text + this.state.current_letter});
   }
 
-  onDropdownChange(e) {
-    console.log(e);
-  }
-
   render() {
     var current_letter = this.state.current_letter;
     var curr_lang_num = this.state.curr_lang_num;
@@ -68,7 +65,7 @@ class App extends React.Component {
             <div className="default text">Choose corpus</div>
             <div className="menu">
               {this.props.lang.map(function(x, i) {
-                return (<div className="item" data-value={i}>{x[0]}</div>);
+                return (<div key={i} className="item" data-value={i}>{x[0]}</div>);
               })}
             </div>
           </div>
@@ -86,11 +83,7 @@ class App extends React.Component {
 }
 
 App.defaultProps = {
-  lang: [
-    ['English', 'data/englishf.json', 'MCFW  UDYGSNRHLETOAIPBVK  XJQZ'],
-    ['Chinese - Pinyin', 'data/pinyinf.json', 'OZSC  JXBTIAEUGNHDYLKFPV  MRWQ'],
-    ['C', 'data/cf.json', 'UGXK  LFPMETIAORSNCDWYQJ  HVBZ']
-  ],
+  lang: layout,
   letters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z']
 };
 
