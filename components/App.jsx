@@ -33,7 +33,28 @@ class App extends React.Component {
       });
       MathJax.Hub.Typeset();
     }});
-    window.setInterval(function() {that.simulate(that);}, 300);
+    // $('.ripple').on('click', function (event) {
+    //   event.preventDefault();
+
+    //   var $div = $('<div/>'),
+    //   btnOffset = $(this).offset(),
+    //   xPos = event.pageX - btnOffset.left,
+    //   yPos = event.pageY - btnOffset.top;
+
+    //   var $ripple = $div.addClass('ripple-effect');;
+
+    //   $ripple.css('height', $(this).height());
+    //   $ripple.css('width', $(this).height());
+    //   $div.css({
+    //     top: yPos - ($ripple.height()/2),
+    //     left: xPos - ($ripple.width()/2),
+    //     background: '#ffffff'
+    //   })
+    //   .appendTo($(this));
+
+    //   window.setTimeout(function() { $div.remove(); }, 500);
+    // });
+    window.setInterval(function() {that.simulate(that);}, 550);
   }
 
   simulate(that) {
@@ -47,35 +68,37 @@ class App extends React.Component {
     var curr_lang_num = this.state.curr_lang_num;
     return (
       <div>
-      <h1>Keyboard: A visualization</h1>
-      {this.props.lang.map(function(x) {
-        return <Keyboard key={x[0] + curr_lang_num} name={x[0]} freq={x[1]} layout={x[2]} next_letter={current_letter} />
-      })}
-      <div className="row">
-        <div className="nine wide column">
-          <div className="ui inverted segment">
-            <span id="textarea">{this.state.textarea_text}</span>
-            <span className="typed-cursor">|</span>
+      <div className="ui grid">
+        <h1>Keyboard: A visualization</h1>
+        {this.props.lang.map(function(x) {
+          return <Keyboard key={x[0] + curr_lang_num} name={x[0]} freq={x[1]} layout={x[2]} next_letter={current_letter} />
+        })}
+        <div className="row">
+          <div className="twelve wide column">
+            <div className="ui inverted segment">
+              <span id="textarea">{this.state.textarea_text}</span>
+              <span className="typed-cursor">|</span>
+            </div>
           </div>
-        </div>
-        <div className="seven wide column">
-          <div className="ui selection dropdown" >
-            <input type="hidden" name="lang" />
-            <i className="dropdown icon"></i>
-            <div className="default text">Choose corpus</div>
-            <div className="menu">
-              {this.props.lang.map(function(x, i) {
-                return (<div key={i} className="item" data-value={i}>{x[0]}</div>);
-              })}
+          <div className="four wide column">
+            <div className="ui selection dropdown" >
+              <input type="hidden" name="lang" />
+              <i className="dropdown icon"></i>
+              <div className="default text">Choose corpus</div>
+              <div className="menu">
+                {this.props.lang.map(function(x, i) {
+                  return (<div key={i} className="item" data-value={i}>{x[0]}</div>);
+                })}
+              </div>
             </div>
           </div>
         </div>
       </div>
       <div className="row matrix">
-        {'$$\\begin{bmatrix}' +
+        {'$$\\begin{matrix}' +
           this.props.lang[this.state.curr_lang_num][1].map(function(x) {
             return x.join('&') + '\\\\';
-          }).join('') + '\\end{bmatrix}$$'}
+          }).join('') + '\\end{matrix}$$'}
       </div>
       </div>
     );

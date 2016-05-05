@@ -10,8 +10,6 @@ class Keyboard extends React.Component {
     this.posToKey = {};
     this.keyToPos = {};
 
-    // this.updateLayout(props);
-
     this.state = {
       locations: ['a', 's', 'd', 'f', 'j', 'k', 'l', 'p'],
       dist: 0,
@@ -20,36 +18,26 @@ class Keyboard extends React.Component {
   }
 
   componentWillMount() {
+    var default_layout = "`~1!2@3#4$5%6^78*9(0)-_=+qwertyuiop[]\\|asdfghjkl;:'zxcvbnm,./?";
+    for (var i = 0; i < default_layout.length; i ++) {
+      this.posToKey[default_layout[i]] = props.layout[i];
+      this.keyToPos[props.layout[i]] = default_layout[i];
+    }
   }
 
   componentDidMount() {
   }
 
-  updateLayout(props) {
-    var default_layout = "`~1!2@3#4$5%6^78*9(0)-_=+qwertyuiop[]\|asdfghjkl;:'zxcvbnm,./?";
-    for (var i = 0; i < default_layout.length; i ++) {
-      this.posToKey[default_layout[i]] = props.layout[i];
-      this.keyToPos[props.layout[i]] = default_layout[i];
-    }
-
-    var center = ['a', 's', 'd', 'f', 'j', 'k', 'l', 'p'];
-    var locations = [];
-    for (var i = 0; i < center.length; i ++)
-      locations.push(this.posToKey[center[i]]);
-  }
-
   componentWillReceiveProps(nextProps) {
-    this.updateLayout(nextProps);
-
     this.setState({letters: this.state.letters + 1});
-    var currentLetter = nextProps.next_letter;
-    var currentPos = this.posToKey[currentLetter];
+
+    var currentPos = this.posToKey[nextProps.next_letter];
     $('#' + currentPos).click();
-    if (this.state.locations[this.props.posToFinger[currentPos]] != currentLetter) {
+    if (this.state.locations[this.props.posToFinger[currentPos]] != currentPos) {
       this.setState({dist: this.state.dist + 1});
       this.state.dist += 1;
       var newLocations = this.state.locations.slice();
-      newLocations[this.props.posToFinger[currentPos]] = currentLetter;
+      newLocations[this.props.posToFinger[currentPos]] = currentPos;
       this.setState({locations: newLocations});
     }
   }
@@ -118,14 +106,14 @@ class Keyboard extends React.Component {
           <li className="right-shift lastitem">shift</li>
           <li className="space lastitem"> </li>
         </ul>
-        <Stats dist_stat={this.state.dist} dist_letters={this.state.letters} />
+        <Stats dist_stat={this.state.dist} dist_letters={this.state.letters} eval={this.props.eval} />
       </div>
     );
   }
 }
 
 Keyboard.defaultProps = {
-  layout: "`~1!2@3#4$5%6^78*9(0)-_=+qwertyuiop[]\|asdfghjkl;:'zxcvbnm,./?",
+  layout: "`~1!2@3#4$5%6^78*9(0)-_=+qwertyuiop[]\\|asdfghjkl;:'zxcvbnm,./?",
   posToFinger: {
     'q': 0, 'a': 0, 'z': 0, 'w': 1, 's': 1, 'x': 1,
     'e': 2, 'd': 2, 'c': 2, 'r': 3, 'f': 3, 'v': 3,

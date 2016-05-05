@@ -7,7 +7,7 @@ body {
 	font: 95% Verdana, Sans-Serif;
 	background: #eee;
 }
-#container {
+#container .grid {
 	margin: 100px auto;
 	width: 688px;
 }
