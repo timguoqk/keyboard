@@ -20,8 +20,8 @@ class Keyboard extends React.Component {
   componentWillMount() {
     var default_layout = "`~1!2@3#4$5%6^78*9(0)-_=+qwertyuiop[]\\|asdfghjkl;:'zxcvbnm,./?";
     for (var i = 0; i < default_layout.length; i ++) {
-      this.posToKey[default_layout[i]] = props.layout[i];
-      this.keyToPos[props.layout[i]] = default_layout[i];
+      this.posToKey[default_layout[i]] = this.props.layout[i];
+      this.keyToPos[this.props.layout[i]] = default_layout[i];
     }
   }
 

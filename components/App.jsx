@@ -59,8 +59,11 @@ class App extends React.Component {
 
   simulate(that) {
     var freq = that.props.lang[this.state.curr_lang_num][1];
-    this.setState({current_letter: helper.getRandomItem(this.props.letters, freq[this.state.current_letter.charCodeAt(0) - 'a'.charCodeAt(0)])});
-    this.setState({textarea_text: this.state.textarea_text + this.state.current_letter});
+    var cl = helper.getRandomItem(this.props.letters, freq[this.state.current_letter.charCodeAt(0) - 'a'.charCodeAt(0)]);
+    this.setState({
+      current_letter: cl,
+      textarea_text: this.state.textarea_text + cl
+    });
   }
 
   render() {
