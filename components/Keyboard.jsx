@@ -106,7 +106,7 @@ class Keyboard extends React.Component {
           <li className="right-shift lastitem">shift</li>
           <li className="space lastitem"> </li>
         </ul>
-        <Stats dist_stat={this.state.dist} dist_letters={this.state.letters} eval={this.props.eval} />
+        <Stats stat={this.props.stat} dist_stat={this.state.dist} dist_letters={this.state.letters} />
       </div>
     );
   }

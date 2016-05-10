@@ -10,6 +10,7 @@ body {
 #container .grid {
 	margin: 100px auto;
 	width: 688px;
+	margin-bottom: 0;
 }
 /* Ripple */
 .material{

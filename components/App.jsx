@@ -74,7 +74,7 @@ class App extends React.Component {
       <div className="ui grid">
         <h1>Keyboard: A visualization</h1>
         {this.props.lang.map(function(x) {
-          return <Keyboard key={x[0] + curr_lang_num} name={x[0]} freq={x[1]} layout={x[2]} next_letter={current_letter} />
+          return <Keyboard key={x[0] + curr_lang_num} name={x[0]} freq={x[1]} layout={x[2]} stat={x[3]} next_letter={current_letter} />
         })}
         <div className="row">
           <div className="twelve wide column">
@@ -96,6 +96,7 @@ class App extends React.Component {
             </div>
           </div>
         </div>
+        <h2>Transition matrix for the current language</h2>
       </div>
       <div className="row matrix">
         {'$$\\begin{matrix}' +
