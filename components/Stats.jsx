@@ -7,15 +7,8 @@ class Stats extends React.Component {
     var keys = _.keys(this.props.stat);
     var stat = this.props.stat;
     return (
+      <div>
       <div className="ui statistics">
-        {keys.map(function(key) {
-          return (
-            <div key={key} className="statistic" id="dist-stat">
-              <div className="value">{stat[key]}</div>
-              <div className="label">{key}</div>
-            </div>
-          );
-        })}
         <div className="statistic" id="dist-stat">
           <div className="value">{this.props.dist_stat}</div>
           <div className="label">Units of distance moved</div>
@@ -24,6 +17,22 @@ class Stats extends React.Component {
           <div className="value">{this.props.dist_letters}</div>
           <div className="label">Number of letters typed</div>
         </div>
+        <div className="statistic" id="dist-stat">
+          <div className="value">{this.props.hand_alternations}</div>
+          <div className="label">Number of hand alternations</div>
+        </div>
+      </div>
+      <div className="ui statistics">
+        {keys.map(function(key) {
+          var s = {'font-size': '1rem'};
+          return (
+            <div key={key} className="ui mini statistic" id="dist-stat">
+              <div className="value" style={s}>{stat[key]}</div>
+              <div className="label" style={s}>{key}</div>
+            </div>
+          );
+        })}
+      </div>
       </div>
     );
   }

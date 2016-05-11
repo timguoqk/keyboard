@@ -13,7 +13,9 @@ class Keyboard extends React.Component {
     this.state = {
       locations: ['a', 's', 'd', 'f', 'j', 'k', 'l', 'p'],
       dist: 0,
-      letters: 0
+      letters: 0,
+      hand_alternations: 0,
+      last_hand: 'left'
     };
   }
 
@@ -34,12 +36,19 @@ class Keyboard extends React.Component {
     var currentPos = this.posToKey[nextProps.next_letter];
     $('#' + currentPos).click();
     if (this.state.locations[this.props.posToFinger[currentPos]] != currentPos) {
-      this.setState({dist: this.state.dist + 1});
-      this.state.dist += 1;
       var newLocations = this.state.locations.slice();
       newLocations[this.props.posToFinger[currentPos]] = currentPos;
-      this.setState({locations: newLocations});
+      this.setState({
+        locations: newLocations,
+        dist: this.state.dist + 1
+      });
     }
+    var nextHand = this.props.posToFinger[currentPos] <= 3 ? 'left' : 'right';
+    if (nextHand != this.state.last_hand)
+      this.setState({
+        last_hand: nextHand,
+        hand_alternations: this.state.hand_alternations + 1
+      });
   }
 
   classNameOf(letter) {
@@ -106,7 +115,7 @@ class Keyboard extends React.Component {
           <li className="right-shift lastitem">shift</li>
           <li className="space lastitem"> </li>
         </ul>
-        <Stats stat={this.props.stat} dist_stat={this.state.dist} dist_letters={this.state.letters} />
+        <Stats stat={this.props.stat} dist_stat={this.state.dist} dist_letters={this.state.letters} hand_alternations={this.state.hand_alternations} />
       </div>
     );
   }
