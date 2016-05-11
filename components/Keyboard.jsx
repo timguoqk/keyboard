@@ -15,7 +15,7 @@ class Keyboard extends React.Component {
       dist: 0,
       letters: 0,
       hand_alternations: 0,
-      last_hand: 'left'
+      consecutive_finger: 0
     };
   }
 
@@ -33,22 +33,23 @@ class Keyboard extends React.Component {
   componentWillReceiveProps(nextProps) {
     this.setState({letters: this.state.letters + 1});
 
-    var currentPos = this.posToKey[nextProps.next_letter];
-    $('#' + currentPos).click();
-    if (this.state.locations[this.props.posToFinger[currentPos]] != currentPos) {
+    var nextPos = this.keyToPos[nextProps.next_letter];
+    var currentPos = this.keyToPos[this.props.next_letter];
+    if (this.props.posToFinger[nextPos] == this.props.posToFinger[currentPos])
+      this.setState({consecutive_finger: this.state.consecutive_finger + 1});
+    $('#' + nextPos).click();
+    if (this.state.locations[this.props.posToFinger[nextPos]] != nextPos) {
       var newLocations = this.state.locations.slice();
-      newLocations[this.props.posToFinger[currentPos]] = currentPos;
+      newLocations[this.props.posToFinger[nextPos]] = nextPos;
       this.setState({
         locations: newLocations,
         dist: this.state.dist + 1
       });
     }
-    var nextHand = this.props.posToFinger[currentPos] <= 3 ? 'left' : 'right';
-    if (nextHand != this.state.last_hand)
-      this.setState({
-        last_hand: nextHand,
-        hand_alternations: this.state.hand_alternations + 1
-      });
+    var nextHand = this.props.posToFinger[nextPos] <= 3 ? 'left' : 'right';
+    var currentHand = this.props.posToFinger[currentPos] <= 3 ? 'left' : 'right';
+    if (nextHand != currentHand)
+      this.setState({hand_alternations: this.state.hand_alternations + 1});
   }
 
   classNameOf(letter) {
@@ -115,7 +116,7 @@ class Keyboard extends React.Component {
           <li className="right-shift lastitem">shift</li>
           <li className="space lastitem"> </li>
         </ul>
-        <Stats stat={this.props.stat} dist_stat={this.state.dist} dist_letters={this.state.letters} hand_alternations={this.state.hand_alternations} />
+        <Stats stat={this.props.stat} dist_stat={this.state.dist} dist_letters={this.state.letters} hand_alternations={this.state.hand_alternations} consecutive_finger={this.state.consecutive_finger} />
       </div>
     );
   }
@@ -131,7 +132,8 @@ Keyboard.defaultProps = {
     'l': 6, 'p': 7
   },
   posToKey: {},
-  keyToPos: {}
+  keyToPos: {},
+  next_letter: 'a'
 }
 
 export default Keyboard;

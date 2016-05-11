@@ -15,11 +15,15 @@ class Stats extends React.Component {
         </div>
         <div className="statistic" id="dist-letters">
           <div className="value">{this.props.dist_letters}</div>
-          <div className="label">Number of letters typed</div>
+          <div className="label">#Letters typed</div>
         </div>
         <div className="statistic" id="dist-stat">
           <div className="value">{this.props.hand_alternations}</div>
-          <div className="label">Number of hand alternations</div>
+          <div className="label">#Hand alternations</div>
+        </div>
+        <div className="statistic" id="dist-stat">
+          <div className="value">{this.props.consecutive_finger}</div>
+          <div className="label">#Consecutive use of the same finger</div>
         </div>
       </div>
       <div className="ui statistics">

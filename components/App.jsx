@@ -87,7 +87,7 @@ class App extends React.Component {
             <div className="ui selection dropdown" >
               <input type="hidden" name="lang" />
               <i className="dropdown icon"></i>
-              <div className="default text">Choose corpus</div>
+              <div className="default text">Choose a language</div>
               <div className="menu">
                 {this.props.lang.map(function(x, i) {
                   return (<div key={i} className="item" data-value={i}>{x[0]}</div>);
